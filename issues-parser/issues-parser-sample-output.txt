@@ -1,0 +1,13 @@
+macmini-b:multilingualism blennon$ ./issues-parser.py multilingualism-issues/db-1.0.json
+
+* Issue 1 
+  Task: Clarify Guillen's identity and his terms
+
+* Issue 1 
+  Response: Clarify meaning of "equilingual" (resolves issue #1): Add note defining "equilingual" in contrast with "multilingual": → <<cset 1e8dcbdefb5d>>
+
+* Issue 1 
+  Response: multilingualism.md: Clarify "Sprachmischung" (see issue #1): Add parenthetical phrase "mixture of languages": → <<cset df78b83066e5>>
+
+* Issue 1 
+  Response: multilingualism.md: Clarify Guillen's identity (see issue #1): * Add phrase "the Spanish writer and comparative literary scholar": → <<cset 0a5357a5d277>>
