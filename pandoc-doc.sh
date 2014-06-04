@@ -2,7 +2,7 @@
 # Process Pandoc Markdown into document formats
 #
 # Sample output filename: 
-# blennon-proglang-v1.0.0-introduction+201406040231.pdf
+# blennon-proglang-v1.0.0-0-g9ebab6a-introduction+201406040231.pdf
 
 set -o errexit
 set -o nounset
@@ -46,11 +46,11 @@ function get_fileinfo {
         dir=$(basename "$PWD")
     fi
 
-    # Catch Git errors when there are no annotated tags to describe:
-    git_describe_string="git -C ${dir_name} describe master --tags"
+    git_describe_string="git -C ${dir_name} describe master --tags --long"
+    # Catch Git errors when there are no tags to describe:
     git_describe=$(${git_describe_string}) && out="${?}" || out="${?}"
     if [ ! "${out}" -eq 0 ]; then
-       echo "^Git error; perhaps there are no annotated tags to describe?" 1>&2
+       echo "^Git error; perhaps there are no tags to describe?" 1>&2
        exit 2
     fi
 
