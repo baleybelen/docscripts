@@ -33,12 +33,8 @@ fi
 
 rsync_opts="\
 -av \
---exclude=.DS_Store \
 --exclude=.git* \
---exclude=_site/ \
---exclude=build/ \
---exclude=resources/ \
---exclude=snapshot/ \
+--exclude-from=${tmp_dir}/.gitignore \
 --force \
 --delete-after"
 
