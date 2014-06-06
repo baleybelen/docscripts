@@ -20,6 +20,8 @@ git="/usr/bin/git"
 
 # Commit messages to exclude:
 message_excludes="Initial commit|.gitignore|README"
+tag_date=$(git show v0.1.0 --format=%ad --date=short --no-patch | grep -E '^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$'
+)
 
 function print_underscored_string {
     # String is $1, underscore character is $2
@@ -42,7 +44,7 @@ else
     "${git}" -C "${my_directory}" tag -l | sort -u -r | while read tag ; do
         echo ""
         echo ""
-        echo "###" "${tag}"
+        echo "### ${tag} (${tag_date})"
         echo ""
         GIT_PAGER=cat "${git}" -C "${my_directory}" tag --list -n99 \
             "${tag}" | sed -e 's/^v[0-9a-zA-Z.-_]* *//' -e 's/^[ \t]*//'
