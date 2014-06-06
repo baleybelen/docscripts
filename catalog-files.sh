@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Description: Catalog files
-# Looks for '^# Description: '
+# Looks for '^(# )?Description: '
 
 set -o errexit
 # set -o nounset
@@ -18,5 +18,5 @@ if [ $# -lt 1 ]; then
     exit 2
 fi
 
-grep --recursive "^# Description: " "${1}" \
+grep -E --recursive "^(# )?[dD]escription: " "${directory}" \
 | sed -e 's/^.*\//* /' -e 's/# Description: / /' -e 's/: / -- /'
