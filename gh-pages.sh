@@ -23,7 +23,7 @@ if [ $# -lt 1 ]; then
 fi
 
 my_directory="${1}"
-jekyll_site_directory="${my_directory}_site"
+jekyll_site_directory="${my_directory}/_site"
 tmp_dir="/tmp/tmp-gh-pages"
 
 if [ -d "${tmp_dir}" ]; then
