@@ -44,7 +44,7 @@ else
         echo ""
         echo "###" "${tag}"
         echo ""
-        GIT_PAGER=cat "${git}" -C "${my_directory}" tag --list -n5 \
-            "${tag}" | sed 's/^v[0-9a-zA-Z.-_]* *//'
+        GIT_PAGER=cat "${git}" -C "${my_directory}" tag --list -n99 \
+            "${tag}" | sed -e 's/^v[0-9a-zA-Z.-_]* *//' -e 's/^[ \t]*//'
     done
 fi
