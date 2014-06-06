@@ -19,6 +19,8 @@ fi
 
 # Directory this script resides in
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+readme="${1}"/README.md
+preview_app="Marked.app"
 
 head -4 "${1}"/README.md
 echo ""
