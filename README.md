@@ -18,20 +18,28 @@ Scripts for producing and managing documents
 Changelog
 ---------
 
+### v0.5.1
+
+Bugfixes for catalog-files.sh
+
+
 ### v0.5.0
 
 Minor enhancements
 
-* update-readme.sh: Extend functionality
-* tag-release.sh: Add user message to temporary tag annotation file
+* catalog-files.sh: Adjust regexps to be more flexible
 * changelog.sh: Change git tag -list output format
-* catalog-files.sh: Adjust regexp to be more flexible
+* tag-release.sh: Add user message
+* update-readme.sh: Extend functionality
 
 
 ### v0.4.0
 
-* New scripts: catalog-files.sh, changelog.sh, update-readme.sh
-* Update file headers for use with catalog-files.sh
+New scripts
+
+* catalog-files.sh -- Catalog files
+* changelog.sh -- Write changelog
+* update-readme.sh -- Update README with file list and changelog
 
 
 ### v0.3.0
@@ -45,10 +53,6 @@ New scripts
 ### v0.2.1
 
 Bugfixes for gh-pages.sh
-
-* Manually copy .gitignore back and forth, to keep it updated
-* Use .gitignore as a rsync exclude file
-* jekyll_site_directory: Correct path in value
 
 
 ### v0.2.0
