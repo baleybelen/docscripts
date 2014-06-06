@@ -6,6 +6,8 @@ set -o errexit
 # set -o nounset
 # set -o xtrace
 
+directory="${1}"
+
 function display_usage {
     echo "Usage: $(basename "${0}") directory" 1>&2
     echo "(Directory can be a relative path)" 1>&2
