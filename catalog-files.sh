@@ -7,6 +7,7 @@ set -o errexit
 # set -o xtrace
 
 directory="${1}"
+grep_exclude="_config.yml"
 
 function display_usage {
     echo "Usage: $(basename "${0}") directory" 1>&2
@@ -18,5 +19,5 @@ if [ $# -lt 1 ]; then
     exit 2
 fi
 
-grep -E --recursive "^(# )?[dD]escription: " "${directory}" \
-| sed -e 's/^.*\//* /' -e 's/^(# )?[dD]escription: / /' -e 's/: / -- /'
+grep -E --recursive --exclude="${grep_exclude}" "^(# )?[dD]escription: " "${directory}" \
+| sed -E -e 's/^.*\//* /' -e 's/(# )?[dD]escription: / /' -e 's/: / -- /'
