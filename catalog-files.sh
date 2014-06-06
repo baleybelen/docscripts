@@ -19,4 +19,4 @@ if [ $# -lt 1 ]; then
 fi
 
 grep -E --recursive "^(# )?[dD]escription: " "${directory}" \
-| sed -e 's/^.*\//* /' -e 's/# Description: / /' -e 's/: / -- /'
+| sed -e 's/^.*\//* /' -e 's/^(# )?[dD]escription: / /' -e 's/: / -- /'
