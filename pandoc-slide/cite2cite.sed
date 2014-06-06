@@ -1,5 +1,5 @@
 #!/usr/bin/env sed -f
-# Rewrite citation formats:
+# Description: Rewrite citation formats
 # - Jekyll-Scholar to Pandoc
 #
 # Input:

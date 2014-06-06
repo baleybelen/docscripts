@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Parse JSON-format issue tracker data
+# Description: Parse JSON-format issue tracker data
 
 import json
 import os

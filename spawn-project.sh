@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Spawn a new project directory and files
+# Description: Spawn a new project directory and files
 
 # Don't use 'set -o errexit': script exits when some queries are answered 'n'?
 # set -o errexit

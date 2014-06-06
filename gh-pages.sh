@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Update GitHub Pages site files in branch 'gh-pages'
+# Description: Update GitHub Pages site files in branch 'gh-pages'
 # Workaround for Jekyll site with plugins (not supported by GitHub Pages)
 
 set -o errexit
