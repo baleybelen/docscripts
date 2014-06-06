@@ -35,6 +35,11 @@ else
         > "${tempfile}"
 fi
 
+cat <<EOF >> "${tempfile}"
+# For Markdown processing, enter a blank line before starting a list.
+# Don't use nested lists here (changelog.sh strips leading whitespace).
+EOF
+
 nano "${tempfile}"
 # Get nano's process ID (assuming there's only one) and wait for it to finish
 wait $(pgrep nano)
