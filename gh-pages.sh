@@ -51,8 +51,16 @@ echo "Copying Jekyll site to ${tmp_dir}..."
 cp -av "${jekyll_site_directory}" "${tmp_dir}"
 
 echo ""
+echo "Copying .gitignore to ${tmp_dir}..."
+cp -av "${my_directory}"/.gitignore "${tmp_dir}"/.gitignore
+
+echo ""
 echo "Checking out branch 'gh-pages'..."
 "${git}" checkout gh-pages
+
+echo ""
+echo "Copying .gitignore to $PWD..."
+cp -av "${tmp_dir}"/.gitignore "$PWD"/.gitignore
 
 echo ""
 echo "Dry run of rsync..."
@@ -63,7 +71,7 @@ read answer
 if [ $(echo "${answer}") = 'y' ]; then
     echo "Now sychronizing files..."
     rsync ${rsync_opts} "${tmp_dir}/" "$PWD"
-    
+
     echo ""
     echo "Output of 'diff -rq ${tmp_dir} $PWD':"
     # Don't know why diff returns exit code other than 0 here, but it does,
