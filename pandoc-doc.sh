@@ -11,7 +11,7 @@ set -o nounset
 pandoc="/usr/local/bin/pandoc"
 
 function display_usage {
-    echo "Usage: $(basename "${0}") -t [pdf | html | odt | docx] -c [0-5] -f file" 1>&2
+    echo "Usage: $(basename "${0}") -t [pdf-article | pdf-book | html | odt | docx] -c [0-5] -f file" 1>&2
     echo "       -t   to format" 1>&2
     echo "       -c   table of contents depth (0 = no table of contents)" 1>&2
     echo "       -f   file to process (can be a relative path)" 1>&2
@@ -63,13 +63,33 @@ function set_global_opts {
 --filter=pandoc-citeproc \
 --metadata=version:${build_name}\
 "
-    pdf_opts="\
+    pdf_article_opts="\
 --latex-engine=xelatex \
 --template=$HOME/sync/config/pandoc/templates/default.latex \
+--variable=documentclass:memoir \
+--variable=classoption:oneside \
+--variable=classoption:article \
 --variable=fontsize:12pt \
---variable=mainfont:Cambria \
+--variable=mainfont:Cardo \
 --output=${build_dir}/${build_name}.pdf\
 "
+
+    pdf_book_opts="\
+--latex-engine=xelatex \
+--template=$HOME/sync/config/pandoc/templates/default.latex \
+--variable=documentclass:memoir \
+--variable=classoption:oneside \
+--variable=include-before:\setcounter{chapter}{-1} \
+--variable=include-before:\settocdepth{chapter} \
+--variable=include-before:\chapterstyle{wilsondob} \
+--variable=include-before:\pagestyle{plain} \
+--variable=include-before:\renewcommand\contentsname{} \
+--variable=fontsize:12pt \
+--variable=mainfont:Cardo \
+--variable=linkcolor:black \
+--output=${build_dir}/${build_name}.pdf\
+"
+
     # Don't use `--standalone`; it's implied by `--template`
     # (so adding it turns it off?):
     html_opts="\
@@ -103,7 +123,8 @@ function set_toc_opts {
 
 function assign_format_opts {
     case "${1}" in
-        "pdf" ) add_opts="${pdf_opts}";;
+        "pdf-article" ) add_opts="${pdf_article_opts}";;
+        "pdf-book" ) add_opts="${pdf_book_opts}";;
         "html") add_opts="${html_opts}";;
         "odt" ) add_opts="${odt_opts}";;
         "docx") add_opts="${docx_opts}";;
@@ -118,14 +139,15 @@ function build_file {
     fi
     echo "Running 'pandoc ${1} ${opts} ${toc_opts} ${add_opts}'..."
     # ${opts} ${toc_opts} ${add_opts} must *not* be quoted, below:
-    "${pandoc}" "${1}" ${opts} ${toc_opts} ${add_opts}
+    "${pandoc}" "${1}" ${opts} ${add_opts} ${toc_opts}
     }
 
 while getopts ":t:c:f:" opt; do
   case "${opt}" in
     "t" ) format="${OPTARG}"
         case "${format}" in
-            "pdf" ) ;;
+            "pdf-article" ) ;;
+            "pdf-book" ) ;;
             "html") ;;
             "odt" ) ;;
             "docx") ;;
