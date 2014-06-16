@@ -96,7 +96,7 @@ function set_global_opts {
 --to=html \
 --self-contained \
 --template=$HOME/sync/config/pandoc/templates/default.html \
---css=$HOME/sync/config/pandoc/css/kultiad-serif.css \
+--css=$HOME/sync/lib/css/kultiad-serif.css \
 --css=$HOME/sync/config/pandoc/css/plus.css \
 --output=${build_dir}/${build_name}.html\
 "
