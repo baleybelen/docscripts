@@ -46,7 +46,7 @@ function get_fileinfo {
         dir=$(basename "$PWD")
     fi
 
-    git_describe_string="git -C ${dir_name} describe master --tags --long"
+    git_describe_string="git -C ${dir_name} describe HEAD --tags --long"
     # Catch Git errors when there are no tags to describe:
     git_describe=$(${git_describe_string}) && out="${?}" || out="${?}"
     if [ ! "${out}" -eq 0 ]; then
