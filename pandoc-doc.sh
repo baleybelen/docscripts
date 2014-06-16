@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Description: Process Pandoc Markdown into document formats
 #
-# Sample output filename: 
+# Sample output filename:
 # blennon-proglang-v1.0.0-0-g9ebab6a-introduction+201406040231.pdf
 
 set -o errexit
