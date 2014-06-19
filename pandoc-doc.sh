@@ -32,12 +32,15 @@ function get_absolute_filename {
 }
 
 function get_fileinfo {
+    username=$(whoami)
     filename=$(basename "${1}")
     extensionless="${filename%%.*}"
 
     dir_name=$(dirname "${1}")
     build_dir="${dir_name}/build"
     dir="${dir_name##*/}"
+
+    buildtag=$(date +%Y%m%d%H%M%S)
 
     # Workaround: we don't want "." as an element of "${build_name}".
     # If file that the script is invoked on is in current working dir,
@@ -55,14 +58,13 @@ function get_fileinfo {
        exit 2
     fi
 
-    build_name=$(whoami)-"${dir}"-"${git_describe}"-"${git_last_commit_date}"-"${extensionless}"+$(date +%Y%m%d%H%M)
+    build_name="${username}"-"${dir}"-"${git_describe}"-"${git_last_commit_date}"-"${filename}"+"${buildtag}"
     }
 
 function set_global_opts {
     opts="\
 --smart \
 --filter=pandoc-citeproc \
---metadata=version:${build_name}\
 "
     pdf_article_opts="\
 --latex-engine=xelatex \
@@ -98,7 +100,12 @@ function set_global_opts {
 --self-contained \
 --template=$HOME/sync/config/pandoc/templates/default.html \
 --css=$HOME/sync/lib/css/kultiad-serif.css \
---css=$HOME/sync/config/pandoc/css/plus.css \
+--metadata=user-name:$username \
+--metadata=project-name:$dir \
+--metadata=filename:$filename \
+--metadata=extensionless:$extensionless \
+--metadata=versiondate:$git_last_commit_date \
+--metadata=build-tag:$buildtag \
 --output=${build_dir}/${build_name}.html\
 "
     odt_opts="\
