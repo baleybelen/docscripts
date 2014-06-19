@@ -58,9 +58,6 @@ mkdir -v -p "${project_path}"/{build,resources/{private,public},snapshot/{archiv
 
 echo "Making .gitignore..."
 cat <<EOF > "${gitignore}"
-.DS_Store
-*.sublime-workspace
-
 _site/
 build/
 resources/
