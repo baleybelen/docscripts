@@ -46,6 +46,7 @@ function get_fileinfo {
         dir=$(basename "$PWD")
     fi
 
+    git_last_commit_date=$(git -C ${dir_name} log HEAD --pretty=format:%ad --date=short -1 | sed 's/-//g')
     git_describe_string="git -C ${dir_name} describe HEAD --tags --long"
     # Catch Git errors when there are no tags to describe:
     git_describe=$(${git_describe_string}) && out="${?}" || out="${?}"
@@ -54,7 +55,7 @@ function get_fileinfo {
        exit 2
     fi
 
-    build_name=$(whoami)-"${dir}"-"${git_describe}"-"${extensionless}"+$(date +%Y%m%d%H%M)
+    build_name=$(whoami)-"${dir}"-"${git_describe}"-"${git_last_commit_date}"-"${extensionless}"+$(date +%Y%m%d%H%M)
     }
 
 function set_global_opts {
