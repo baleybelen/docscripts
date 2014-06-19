@@ -65,6 +65,12 @@ function set_global_opts {
     opts="\
 --smart \
 --filter=pandoc-citeproc \
+--metadata=user-name:$username \
+--metadata=project-name:$dir \
+--metadata=filename:$filename \
+--metadata=extensionless:$extensionless \
+--metadata=versiondate:$git_last_commit_date \
+--metadata=build-tag:$buildtag \
 "
     pdf_article_opts="\
 --latex-engine=xelatex \
@@ -100,12 +106,6 @@ function set_global_opts {
 --self-contained \
 --template=$HOME/sync/config/pandoc/templates/default.html \
 --css=$HOME/sync/lib/css/kultiad-serif.css \
---metadata=user-name:$username \
---metadata=project-name:$dir \
---metadata=filename:$filename \
---metadata=extensionless:$extensionless \
---metadata=versiondate:$git_last_commit_date \
---metadata=build-tag:$buildtag \
 --output=${build_dir}/${build_name}.html\
 "
     odt_opts="\
