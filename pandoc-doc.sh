@@ -82,6 +82,8 @@ function set_global_opts {
 --variable=classoption:article \
 --variable=fontsize:12pt \
 --variable=mainfont:Cardo \
+--variable=monofont:Inconsolata \
+--variable=urlcolor:black \
 --output=${build_dir}/${build_name}.pdf\
 "
 
@@ -97,7 +99,8 @@ function set_global_opts {
 --variable=include-before:\renewcommand\contentsname{} \
 --variable=fontsize:12pt \
 --variable=mainfont:Cardo \
---variable=linkcolor:black \
+--variable=monofont:Inconsolata \
+--variable=urlcolor:black \
 --output=${build_dir}/${build_name}.pdf\
 "
 
