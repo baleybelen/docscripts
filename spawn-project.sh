@@ -40,6 +40,7 @@ project_name="${1}"
 project_name_underscored=$(print_underscored_string "${project_name}" "=")
 project_path="${destination_dir}"/"${project_name}"
 gitignore="${project_path}"/.gitignore
+gitattributes="${project_path}"/.gitattributes
 readme="${project_path}"/README.md
 sublime_project_file="${project_path}"/"${project_name}".sublime-project
 
@@ -47,8 +48,8 @@ git="/usr/bin/git"
 jekyll="/Users/blennon/.rbenv/shims/jekyll"
 
 echo "Do you want a Jekyll site for this project? (y/n) "
-read answer
-if [ $(echo "${answer}") = 'y' ]; then
+read jekyll_answer
+if [ $(echo "${jekyll_answer}") = 'y' ]; then
 	echo "Running 'jekyll new ${project_path}'..."
 	"${jekyll}" new "${project_path}"
 fi
@@ -65,6 +66,17 @@ snapshot/
 EOF
 
 cat "${gitignore}"
+
+echo "Making .gitattributes..."
+cat <<EOF > "${gitattributes}"
+*.md ident filter=keywords
+EOF
+
+if [ $(echo "${jekyll_answer}") = 'y' ]; then
+    echo "_config.yml filter=keywords" >> "${gitattributes}"
+fi
+
+cat "${gitattributes}"
 
 echo "Making README.md..."
 cat <<EOF > "${readme}"
@@ -92,12 +104,13 @@ cat "${sublime_project_file}"
 echo "Initalizing Git repository..."
 "${git}" -C "${project_path}" init
 
-echo "Adding and committing ${gitignore}, ${readme}, ${sublime_project_file}..."
+echo "Adding and committing ${gitignore}, ${gitattributes}, ${readme}, ${sublime_project_file}..."
 "${git}" -C "${project_path}" add \
-	"${gitignore}" "${readme}" "${sublime_project_file}"
+	"${gitignore}" "${gitattributes}" "${readme}" "${sublime_project_file}"
 "${git}" -C "${project_path}" commit \
 	-m "Create \
 $(basename ${gitignore}), \
+$(basename ${gitattributes}), \
 $(basename ${readme}), \
 $(basename ${sublime_project_file})"
 
@@ -110,6 +123,9 @@ if [ $(echo "${answer}") = 'y' ]; then
 	echo "Making branch 'gh-pages'..."
 	"${git}" -C "${project_path}" branch gh-pages
 fi
+
+echo "Checking out branch 'develop'..."
+"${git}" -C "${project_path}" checkout develop
 
 echo "Output of 'git -C ${project_path} status':"
 "${git}" -C "${project_path}" status
