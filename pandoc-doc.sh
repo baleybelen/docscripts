@@ -75,6 +75,8 @@ function set_global_opts {
     pdf_article_opts="\
 --latex-engine=xelatex \
 --template=$HOME/sync/config/pandoc/templates/default.latex \
+--include-in-header=$HOME/sync/config/pandoc/templates/article-head.tex \
+--include-before-body=$HOME/sync/config/pandoc/templates/article-body.tex \
 --variable=documentclass:memoir \
 --variable=classoption:oneside \
 --variable=classoption:article \
