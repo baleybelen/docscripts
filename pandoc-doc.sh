@@ -83,6 +83,7 @@ function set_global_opts {
 --variable=fontsize:12pt \
 --variable=mainfont:Cardo \
 --variable=monofont:Inconsolata \
+--variable=linkcolor:black \
 --variable=urlcolor:black \
 --output=${build_dir}/${build_name}.pdf\
 "
@@ -100,6 +101,7 @@ function set_global_opts {
 --variable=fontsize:12pt \
 --variable=mainfont:Cardo \
 --variable=monofont:Inconsolata \
+--variable=linkcolor:black \
 --variable=urlcolor:black \
 --output=${build_dir}/${build_name}.pdf\
 "
