@@ -58,7 +58,7 @@ function get_fileinfo {
        exit 2
     fi
 
-    build_name="${username}"-"${dir}"-"${git_describe}"-"${git_last_commit_date}"-"${filename}"+"${buildtag}"
+    build_name="${dir}"-"${git_describe}"-"${git_last_commit_date}"-"${filename}"+"${buildtag}"
     }
 
 function set_global_opts {
