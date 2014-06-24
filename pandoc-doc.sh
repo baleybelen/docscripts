@@ -11,7 +11,7 @@ set -o nounset
 pandoc="/usr/local/bin/pandoc"
 
 function display_usage {
-    echo "Usage: $(basename "${0}") -t [pdf-article | pdf-book | html | odt | docx] -c [0-5] -f file" 1>&2
+    echo "Usage: $(basename "${0}") -t [pdf-article-plain | pdf-article-plainer | pdf-article-fancy | pdf-book | html-fancy | html-plain | html-bare | odt | docx] -c [0-5] -f file" 1>&2
     echo "       -t   to format" 1>&2
     echo "       -c   table of contents depth (0 = no table of contents)" 1>&2
     echo "       -f   file to process (can be a relative path)" 1>&2
@@ -72,7 +72,18 @@ function set_global_opts {
 --metadata=versiondate:$git_last_commit_date \
 --metadata=build-tag:$buildtag \
 "
-    pdf_article_opts="\
+    pdf_article_plainer_opts="\
+--latex-engine=xelatex \
+--output=${build_dir}/${build_name}.pdf\
+"
+    pdf_article_plain_opts="\
+--latex-engine=xelatex \
+--variable=fontsize:12pt \
+--variable=mainfont:Cardo \
+--variable=monofont:Inconsolata \
+--output=${build_dir}/${build_name}.pdf\
+"
+    pdf_article_fancy_opts="\
 --latex-engine=xelatex \
 --template=$HOME/sync/config/pandoc/templates/default.latex \
 --include-in-header=$HOME/sync/config/pandoc/templates/article-head.tex \
@@ -87,7 +98,6 @@ function set_global_opts {
 --variable=urlcolor:black \
 --output=${build_dir}/${build_name}.pdf\
 "
-
     pdf_book_opts="\
 --latex-engine=xelatex \
 --template=$HOME/sync/config/pandoc/templates/default.latex \
@@ -105,14 +115,22 @@ function set_global_opts {
 --variable=urlcolor:black \
 --output=${build_dir}/${build_name}.pdf\
 "
-
     # Don't use `--standalone`; it's implied by `--template`
     # (so adding it turns it off?):
-    html_opts="\
+    html_fancy_opts="\
 --to=html \
 --self-contained \
 --template=$HOME/sync/config/pandoc/templates/default.html \
 --css=$HOME/sync/lib/css/kultiad-serif.css \
+--output=${build_dir}/${build_name}.html\
+"
+    html_plain_opts="\
+--to=html \
+--self-contained \
+--output=${build_dir}/${build_name}.html\
+"
+    html_bare_opts="\
+--to=html \
 --output=${build_dir}/${build_name}.html\
 "
     odt_opts="\
@@ -138,9 +156,13 @@ function set_toc_opts {
 
 function assign_format_opts {
     case "${1}" in
-        "pdf-article" ) add_opts="${pdf_article_opts}";;
+        "pdf-article-plain" ) add_opts="${pdf_article_plain_opts}";;
+        "pdf-article-plainer" ) add_opts="${pdf_article_plainer_opts}";;
+        "pdf-article-fancy" ) add_opts="${pdf_article_fancy_opts}";;
         "pdf-book" ) add_opts="${pdf_book_opts}";;
-        "html") add_opts="${html_opts}";;
+        "html-bare") add_opts="${html_bare_opts}";;
+        "html-plain") add_opts="${html_plain_opts}";;
+        "html-fancy") add_opts="${html_fancy_opts}";;
         "odt" ) add_opts="${odt_opts}";;
         "docx") add_opts="${docx_opts}";;
     esac
@@ -161,9 +183,13 @@ while getopts ":t:c:f:" opt; do
   case "${opt}" in
     "t" ) format="${OPTARG}"
         case "${format}" in
-            "pdf-article" ) ;;
+            "pdf-article-plain" ) ;;
+            "pdf-article-plainer" ) ;;
+            "pdf-article-fancy" ) ;;
             "pdf-book" ) ;;
-            "html") ;;
+            "html-bare") ;;
+            "html-plain") ;;
+            "html-fancy") ;;
             "odt" ) ;;
             "docx") ;;
             *) echo "Invalid format parameter: ${format}" 1>&2
