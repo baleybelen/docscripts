@@ -10,8 +10,10 @@ directory="${1}"
 grep_exclude="_config.yml"
 
 function display_usage {
-    echo "Usage: $(basename "${0}") directory" 1>&2
-    echo "(Directory can be a relative path)" 1>&2
+cat <<EOF
+Usage: $(basename "${0}") <directory>
+(<directory> can be a relative path)
+EOF
     }
 
 if [ $# -lt 1 ]; then
