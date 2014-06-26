@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Description: Catalog files
-# Looks for '^(# )?Description: '
+# Looks for '^(# )?[dD]escription: '
 
 set -o errexit
 # set -o nounset
