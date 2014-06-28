@@ -16,10 +16,11 @@ Usage: $(basename "${0}") <directory>
 EOF
     }
 
-if [ $# -lt 1 ]; then
-    display_usage
-    exit 2
-fi
-
-grep -E --recursive --exclude="${grep_exclude}" "^(# )?[dD]escription: " "${directory}" \
-| sed -E -e 's/^.*\//* /' -e 's/(# )?[dD]escription: / /' -e 's/: / -- /'
+test $# -gt 0 -a $# -lt 2 -a -d "${directory}" && \
+    grep -E \
+        --recursive \
+        --exclude="${grep_exclude}" \
+        "^(# )?[dD]escription: " "${directory}" \
+        | sed -E -e 's/^.*\//* /' \
+                 -e 's/(# )?[dD]escription: / /' -e 's/: / -- /' \
+    && exit 0 || display_usage && exit 1
