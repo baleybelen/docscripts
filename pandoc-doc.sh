@@ -10,6 +10,11 @@ set -o nounset
 
 pandoc="/usr/local/bin/pandoc"
 
+# Directory this script resides in
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+templates_dir="${script_dir}"/pandoc-templates
+html_template="${templates_dir}"/default.html
+
 function display_usage {
     echo "Usage: $(basename "${0}") -t [pdf-article-plain | pdf-article-plainer | pdf-article-fancy | pdf-book | html-fancy | html-plain | html-bare | odt | docx] -c [0-5] -f file" 1>&2
     echo "       -t   to format" 1>&2
@@ -120,7 +125,7 @@ function set_global_opts {
     html_fancy_opts="\
 --to=html \
 --self-contained \
---template=$HOME/sync/config/pandoc/templates/default.html \
+--template=${html_template} \
 --css=$HOME/sync/lib/css/kultiad-serif.css \
 --output=${build_dir}/${build_name}.html\
 "
