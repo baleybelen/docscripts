@@ -6,8 +6,10 @@ set -o errexit
 # set -o xtrace
 
 function display_usage {
-    echo "Usage: $(basename "${0}") directory" 1>&2
-    echo "(Directory can be a relative path)" 1>&2
+cat <<EOF
+Usage: $(basename "${0}") <directory>
+(<directory> can be a relative path)
+EOF
     }
 
 if [ $# -lt 1 ]; then
