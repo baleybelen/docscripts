@@ -16,7 +16,7 @@ Usage: $(basename "${0}") <directory>
 EOF
     }
 
-test $# -gt 0 -a $# -lt 2 -a -d "${directory}" && \
+test $# -eq 1 -a -d "${directory}" && \
     grep -E \
         --recursive \
         --exclude="${grep_exclude}" \
