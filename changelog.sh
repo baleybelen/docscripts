@@ -46,7 +46,11 @@ else
             | grep -E '^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$')"
         echo ""
         GIT_PAGER=cat "${git}" -C "${my_directory}" tag --list -n99 \
-            "${tag}" | sed -e 's/^v[0-9a-zA-Z.-_]* *//' -e 's/^[ \t]*//'
+            "${tag}" \
+            | sed -e 's/^v[0-9a-zA-Z.-_]* *//' \
+                  -e 's/^[ \t]*[\*] /* /' \
+                  -e 's/^[ \t]*-/    -/'
+
     done
 fi &&
 
