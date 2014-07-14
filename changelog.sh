@@ -11,14 +11,14 @@ git="/usr/bin/git"
 # Commit messages to exclude:
 message_excludes="Initial commit|.gitignore|README"
 
-function display_usage {
+display_usage() {
 cat <<EOF
 Usage: $(basename "${0}") <directory>
 (<directory> can be a relative path)
 EOF
     }
 
-function print_underscored_string {
+print_underscored_string() {
     # String is $1, underscore character is $2
     size="${#1}"
     char="${2}"
