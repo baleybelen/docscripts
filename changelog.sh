@@ -18,17 +18,24 @@ Usage: $(basename "${0}") <directory>
 EOF
     }
 
-print_underscored_string() {
-    # String is $1, underscore character is $2
-    size="${#1}"
-    char="${2}"
-    printf "${1}\n"
-    printf "%0.s${2}" $(seq 1 "${size}")
+print_underscored() {
+    #@ DESCRIPTION: print underscored string
+    #@        NOTE: for producing, e.g., setex-style headers
+    #@       USAGE: print_underscored <string> <underscorechar>
+    test $# -eq 2 && {
+        string="${1}"; stringsize="${#1}"; underscorechar="${2}"
+        printf "${string}\n"
+        printf "%0.s${underscorechar}" $(seq 1 "${stringsize}")
+        return 0
+        } || {
+        error="Error: print_underscored() requires <string> <underscorechar>"
+        printf "${error}\n" 1>&2; return 1
+        }
     }
 
 test $# -eq 1 -a -d "${my_directory}" &&
 
-print_underscored_string "Changelog" "-" &&
+print_underscored "Changelog" "-" &&
 
 # If there are no annotated tags, get commit messages from log
 if [[ -z $("${git}" -C "${my_directory}" tag -l) ]]; then
