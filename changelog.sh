@@ -24,22 +24,22 @@ cat <<EOF
 Usage: $(basename "${0}") <directory>
 (<directory> can be a relative path)
 EOF
-    }
+}
 
-print_underscored() {
-    #@ DESCRIPTION: print underscored string
-    #@        NOTE: for producing, e.g., setex-style headers
-    #@       USAGE: print_underscored <string> <underscorechar>
-    test $# -eq 2 && {
-        string="${1}"; stringsize="${#1}"; underscorechar="${2}"
-        printf "${string}\n"
-        printf "%0.s${underscorechar}" $(seq 1 "${stringsize}")
-        return 0
-        } || {
-        error="Error: print_underscored() requires <string> <underscorechar>"
-        printf "${error}\n" 1>&2; return 1
-        }
-    }
+print_underscored() #@ Make setex-style header
+{                   #@ Usage: print_underscored <string> <underscorechar>
+  error="Error: print_underscored() requires <string> <underscorechar>"
+  test $# -eq 2 &&
+  {
+    string="${1}"; stringsize="${#1}"; underscorechar="${2}"
+    printf "${string}\n"
+    printf "%0.s${underscorechar}" $(seq 1 "${stringsize}")
+    return 0
+  } || {
+    printf "${error}\n" 1>&2; return 1
+  }
+}
+
 
 test $# -eq 1 -a -d "${my_directory}" &&
 
