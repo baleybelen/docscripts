@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Description: Catalog files
-# Looks for '^(# )?[dD]escription: '
+#: Description: Catalog files
+# Looks for '^(#: )?[dD]escription: '
 
 set -o errexit
 # set -o nounset
@@ -21,8 +21,8 @@ test $# -eq 1 -a -d "${directory}" &&
 grep -E \
     --recursive \
     --exclude="${grep_exclude}" \
-    "^(# )?[dD]escription: " "${directory}" \
+    "^(#: )?[dD]escription: " "${directory}" \
     | sed -E -e 's/^.*\//* /' \
-             -e 's/(# )?[dD]escription: / /' -e 's/: / -- /' &&
+             -e 's/(#: )?[dD]escription: / /' -e 's/: / -- /' &&
 
 exit 0 || display_usage && exit 1

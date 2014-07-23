@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Description: For tagging releases
+#: Description: For tagging releases
 # Retrieves commits since the last annotated tag 
 # or all commits, if no annotated tags exist
 

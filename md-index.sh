@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Description: Create Markdown-formatted linked list of files in working directory
+#: Description: Create Markdown-formatted linked list of files in working directory
 # For, e.g., mdwiki
 
 index_file="index.md"

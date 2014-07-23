@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Description: Update README with file list and changelog
+#: Description: Update README with file list and changelog
 # Uses catalog-files.sh and changelog.sh
 # Assumes `head -4 README.md` is static content
 
