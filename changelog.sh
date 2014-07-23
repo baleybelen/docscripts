@@ -15,7 +15,11 @@ git="/usr/bin/git"
 message_excludes="Initial commit|.gitignore|README" # Exclude commit messages
 
 
-display_usage() {
+## Functions
+##
+
+display_usage()
+{
 cat <<EOF
 Usage: $(basename "${0}") <directory>
 (<directory> can be a relative path)
@@ -41,6 +45,10 @@ test $# -eq 1 -a -d "${my_directory}" &&
 
 print_underscored "Changelog" "-" &&
 
+
+## Main loop
+##
+
 # If there are no annotated tags, get commit messages from log
 if [[ -z $("${git}" -C "${my_directory}" tag -l) ]]; then
     printf "\n\n"
@@ -60,5 +68,9 @@ else
 
     done
 fi &&
+
+
+## Exit
+##
 
 exit 0 || display_usage && exit 1
