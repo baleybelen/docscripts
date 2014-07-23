@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-# Description: Write changelog
+#: description: Write changelog
+#: usage:       changelog.sh <directory>
+#: options:
+#: author:      Brian Lennon
+#: version:     $version$
+#: date:        $date$
 
 set -o errexit
 # set -o nounset # Interferes with use of unbound variables
