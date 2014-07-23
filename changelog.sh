@@ -12,9 +12,8 @@ set -o errexit
 
 my_directory="${1}"
 git="/usr/bin/git"
+message_excludes="Initial commit|.gitignore|README" # Exclude commit messages
 
-# Commit messages to exclude:
-message_excludes="Initial commit|.gitignore|README"
 
 display_usage() {
 cat <<EOF
