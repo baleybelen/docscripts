@@ -41,7 +41,7 @@ print_underscored() #@ Make setex-style header
 }
 
 
-test $# -eq 1 -a -d "${my_directory}" &&
+test $# -eq 1 -a -d "${my_directory}" && # Test argument
 
 print_underscored "Changelog" "-" &&
 
