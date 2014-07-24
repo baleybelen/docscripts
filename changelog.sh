@@ -28,10 +28,10 @@ EOF
 
 print_underscored() #@ Make setex-style header
 {                   #@ Usage: print_underscored <string> <underscorechar>
-  error="Error: print_underscored() requires <string> <underscorechar>"
+  local error="Error: print_underscored() requires <string> <underscorechar>"
   test $# -eq 2 &&
   {
-    string="${1}"; stringsize="${#1}"; underscorechar="${2}"
+    local string="${1}"; local stringsize="${#1}"; local underscorechar="${2}"
     printf "${string}\n"
     printf "%0.s${underscorechar}" $(seq 1 "${stringsize}")
     return 0
