@@ -12,8 +12,9 @@ set -o errexit
 
 my_directory="${1}"
 git="/usr/bin/git"
-message_excludes="Initial commit|.gitignore|README" # Exclude commit messages
 
+# Commit messages to exclude
+msg_exclude_regex=(".gitignore|Initial commit|README")
 
 ## Functions
 ##
@@ -53,7 +54,7 @@ print_underscored "Changelog" "-" &&
 if [[ -z $("${git}" -C "${my_directory}" tag -l) ]]; then
     printf "\n\n"
     "${git}" -C "${my_directory}" log --no-merges --format="* %s" \
-     | sed -E /"${message_excludes}"/d
+     | sed -E /"${msg_exclude_regex}"/d
 else
     # Get list of tags, sort in reverse order, and print tag messages
     "${git}" -C "${my_directory}" tag -l | sort -u -r | while read tag ; do
