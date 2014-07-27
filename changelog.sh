@@ -34,8 +34,8 @@ Usage: $(basename "${0}") <directory>
 EOF
 }
 
-print_underscored() #@ Make setex-style header
-{                   #@ Usage: print_underscored <string> <underscorechar>
+print_underscored()      #@ Make setex-style header
+{                        #@ Usage: print_underscored <string> <underscorechar>
   local error="Error: print_underscored() requires <string> <underscorechar>"
   test $# -eq 2 &&
   {
