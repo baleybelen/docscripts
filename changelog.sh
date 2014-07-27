@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
-#: description: Write changelog
-#: usage:       changelog.sh <directory>
+
+#: description:     Write changelog
+#: usage:           changelog.sh <directory>
 #: options:
-#: author:      Brian Lennon
-#: version:     $version$
-#: date:        $date$
+#: author:          Brian Lennon
+#: version:         $version$
+#: date:            $date$
+
+
+# OPTIONS
 
 set -o errexit
-# set -o nounset # Interferes with use of unbound variables
+# set -o nounset    # Interferes with use of unbound variables
 # set -o xtrace
+
+
+# VARIABLES
 
 my_directory="${1}"
 git="/usr/bin/git"
@@ -16,8 +23,8 @@ git="/usr/bin/git"
 # Commit messages to exclude
 msg_exclude_regex=(".gitignore|Initial commit|README")
 
-## Functions
-##
+
+# FUNCTIONS
 
 display_usage()
 {
@@ -42,13 +49,11 @@ print_underscored() #@ Make setex-style header
 }
 
 
+# BODY OF SCRIPT WITH MAIN LOOP
+
 test $# -eq 1 -a -d "${my_directory}" && # Test argument
 
 print_underscored "Changelog" "-" &&
-
-
-## Main loop
-##
 
 # If there are no annotated tags, get commit messages from log
 if [[ -z $("${git}" -C "${my_directory}" tag -l) ]]; then
@@ -71,7 +76,6 @@ else
 fi &&
 
 
-## Exit
-##
+# EXIT
 
 exit 0 || display_usage && exit 1
