@@ -61,11 +61,16 @@ if [[ -z $("${git}" -C "${targetdir}" tag -l) ]]; then
   "${git}" -C "${targetdir}" log --no-merges --format="* %s"                  \
     | sed -E /"${msg_exclude_regex}"/d
 else
-  # Get list of tags, sort in reverse order, and print tag messages
-  "${git}" -C "${targetdir}" tag -l | sort -u -r | while read tag ; do
+  # Get list of tags, sort in reverse order, and pipe to loop
+  "${git}" -C "${targetdir}" tag -l | sort -u -r |                            \
+  # Loop, printing tag name as Markdown header, followed by tag date 
+  while read tag ; do
     printf "\n\n### ${tag} $(${git} -C ${targetdir} show ${tag}               \
-      --format=%ad --date=short --no-patch                                    \
-      | grep -E '^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$')\n\n"
+      --format=%ad --date=short --no-patch |                                  \
+      # Select tag date by filtering output of `git show`
+      grep -E '^(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$')\n\n"
+    # Print tag message, remove tag names (we don't want duplicate here),
+    # dedent L1 bullet items, and indent L2 bullet items using spaces
     GIT_PAGER=cat "${git}" -C "${targetdir}" tag --list -n99                  \
       "${tag}"                                                                \
       | sed -e 's/^v[0-9a-zA-Z.-_]* *//'                                      \
