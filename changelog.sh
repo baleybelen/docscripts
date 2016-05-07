@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-#: description:     Write changelog
-#: usage:           changelog.sh <directory>
+#: description: Write changelog
+#: usage:       changelog.sh <directory>
 #: options:
-#: author:          Brian Lennon
-#: version:         $version$
-#: date:            $date$
+#: author:      Brian Lennon
+#: version:     $version$
+#: date:        $date$
 
 
 # OPTIONS
@@ -63,7 +63,7 @@ if [[ -z $("${git}" -C "${targetdir}" tag -l) ]]; then
 else
   # Get list of tags, sort in reverse order, and pipe to loop
   "${git}" -C "${targetdir}" tag -l | sort -u -r |                            \
-  # Loop, printing tag name as Markdown header, followed by tag date 
+  # Loop, printing tag name as Markdown header, followed by tag date
   while read tag ; do
     printf "\n\n### ${tag} $(${git} -C ${targetdir} show ${tag}               \
       --format=%ad --date=short --no-patch |                                  \
