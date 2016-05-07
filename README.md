@@ -3,13 +3,12 @@ docscripts
 
 Scripts for producing and managing documents
 
+* addfm.sh -- Add YAML front matter to files
 * catalog-files.sh -- Catalog files
 * changelog.sh -- Write changelog
 * gh-pages.sh -- Update GitHub Pages site files in branch 'gh-pages'
-* issues-parser.py -- Parse JSON-format issue tracker data
 * md-index.sh -- Create Markdown-formatted linked list of files in working directory
 * pandoc-doc.sh -- Process Pandoc Markdown into document formats
-* cite2cite.sed -- Rewrite citation formats
 * spawn-project.sh -- Spawn a new project directory and files
 * tag-release.sh -- For tagging releases
 * update-readme.sh -- Update README with file list and changelog
@@ -17,6 +16,13 @@ Scripts for producing and managing documents
 
 Changelog
 ---------
+
+### v0.7.0 2016-05-07
+
+New script
+    
+* addfm.sh -- Add YAML front matter to files
+
 
 ### v0.6.0 2014-07-12
 
